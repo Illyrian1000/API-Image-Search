@@ -6,16 +6,20 @@ export default function SearchBar(props) {
   function changeSearchKey(e) {
     e.preventDefault();
     setSearchKey(e.target.value);
-    console.log(e.target.value);
   }
 
   function submitValue(e) {
     e.preventDefault();
     if (searchKey) {
-      console.log(searchKey);
       props.clicked(searchKey);
     } else {
       console.log("Search for an image");
+    }
+  }
+
+  function submitEnter(e) {
+    if (e.key === "Enter") {
+      submitValue(e);
     }
   }
 
@@ -26,13 +30,12 @@ export default function SearchBar(props) {
         placeholder="search image"
         onChange={changeSearchKey}
         value={searchKey}
+        onKeyDown={submitEnter}
       ></input>
 
-      <a href="/">
-        <button className="bn632-hover bn22" onClick={submitValue}>
-          Search
-        </button>
-      </a>
+      <button className="bn632-hover bn22" onClick={submitValue}>
+        Search
+      </button>
     </section>
   );
 }
